@@ -16,8 +16,7 @@ def main():
     lookup = client.tweet_lookup(tweet_ids=all_tweet_ids)
     for page in lookup:
         result = expansions.flatten(page)
-        for tweet in result:
-            compliant_tweet_ids.append(tweet['id'])
+        compliant_tweet_ids.extend(tweet['id'] for tweet in result)
     # Here we get a difference betweetn the original
     non_compliant_tweet_ids = list(set(all_tweet_ids) - set(compliant_tweet_ids))
     # Here we are printing the list of Tweet IDs that are not compliant in your dataset
